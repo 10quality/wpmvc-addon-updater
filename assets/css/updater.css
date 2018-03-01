@@ -1,0 +1,54 @@
+/**
+ * WPMVC Updater
+ *
+ * @author Cami Mostajo
+ * @package WPMVC\Addons\Updater
+ * @license MIT
+ * @version 1.0.0
+ */
+.add-wpmvc-updater::before {
+    content: "";
+    font-family: Dashicons;
+    speak: none;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-animation:spin 4s linear infinite;
+    -moz-animation:spin 4s linear infinite;
+    animation:spin 4s linear infinite;
+}
+.add-wpmvc-updater.updating::before,
+.add-wpmvc-updater.queued::before {
+    content: "\f531";
+    margin-right: 10px;
+}
+.add-wpmvc-updater.updated::before {
+    content: "\f147";
+    margin-right: 10px;
+}
+.add-wpmvc-updater.error::before {
+    content: "\f158";
+    margin-right: 10px;
+}
+.add-wpmvc-updater.updating,
+.add-wpmvc-updater.queued, {
+    background-color: #55afd4 !important;
+    border-color: #418cab !important;
+    box-shadow: 0 1px 0 #357088 !important;
+    text-shadow: 0 -1px 1px #357088 !important;
+}
+.add-wpmvc-updater.error {
+    background-color: #43A047 !important;
+    border-color: #749675 !important;
+    box-shadow: 0 1px 0 #2E7D32 !important;
+    text-shadow: 0 -1px 1px #2E7D32 !important;
+}
+.add-wpmvc-updater.error {
+    background-color: #F44336 !important;
+    border-color: #E53935 !important;
+    box-shadow: 0 1px 0 #C62828 !important;
+    text-shadow: 0 -1px 1px #C62828 !important;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
