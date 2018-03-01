@@ -55,13 +55,15 @@ var WPMVCUpdater = function(options) {
             /**
              * Requests an update.
              * @since 1.0.0
+             * @since 1.0.1 Namespace added.
              *
-             * @param {object} el     jQquery element caller.
-             * @param {string} type   Target type.
-             * @param {string} folder Target folder.
-             * @param {string} url    Zip URL.
+             * @param {object} el        jQquery element caller.
+             * @param {string} type      Target type.
+             * @param {string} folder    Target namespace.
+             * @param {string} namespace Target folder.
+             * @param {string} url       Zip URL.
              */
-            add: function(el, type, folder, url)
+            add: function(el, type, folder, namespace, url)
             {
                 if (!el.hasClass('queued')) {
                     wpmvcUpdater.queue.push({
@@ -69,6 +71,7 @@ var WPMVCUpdater = function(options) {
                         type: type,
                         folder: folder,
                         url: url,
+                        namespace: namespace,
                     });
                     el.addClass('queued');
                     el.find('.dashicons').show();
@@ -234,6 +237,7 @@ jQuery(document).ready(function () {
                     jQuery(this),
                     options.type,
                     options.folder,
+                    options.namespace,
                     jQuery(this).attr('href')
                 );
             }
