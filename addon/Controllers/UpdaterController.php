@@ -1,10 +1,11 @@
 <?php
 
-namespace WPMVC\Addons\Updater\Controller;
+namespace WPMVC\Addons\Updater\Controllers;
 
 use WPMVC\Log;
 use WPMVC\Request;
 use WPMVC\Response;
+use WPMVC\MVC\Controller;
 use TenQuality\WP\File;
 
 /**
@@ -47,14 +48,14 @@ class UpdaterController extends Controller
             'wpmvc-updater',
             addon_assets_url( 'js/updater.js', __FILE__ ),
             ['jquery'],
-            $this->main->config->get( 'version' ),
+            $main->config->get( 'version' ),
             true
         );
         wp_enqueue_style(
             'wpmvc-updater',
             addon_assets_url( 'css/updater.css', __FILE__ ),
             [],
-            $this->main->config->get( 'version' )
+            $main->config->get( 'version' )
         );
     }
     /**
