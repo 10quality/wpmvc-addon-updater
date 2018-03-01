@@ -39,16 +39,14 @@ class UpdaterAddon extends Addon
      * Displays updater button.
      * @since 1.0.0
      *
-     * @param string $type   Target type.
-     * @param string $folder Target folder.
      * @param string $url    ZIP url.
      * @param string $class  CSS class.
      */
-    public function updater_button($type, $folder, $url, $class = '')
+    public function updater_button( $url, $class = '' )
     {
         $this->mvc->view->show( 'button', [
-            'type'      => $type,
-            'folder'    => $folder,
+            'type'      => $this->main->config->get( 'type' ),
+            'folder'    => $this->main->config->get( 'paths.root_folder' ),
             'url'       => $url,
             'class'     => $class
         ] );
