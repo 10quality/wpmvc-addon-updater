@@ -1,42 +1,21 @@
-# Wordpress MVC Addon Template
---------------------------------
+# Updater Addon (for Wordpress MVC)
 
-Custom [Add-on](http://www.wordpress-mvc.com/v1/add-ons/) development template for [Wordpress MVC](http://www.wordpress-mvc.com/) addon development.
+[![Latest Stable Version](https://poser.pugx.org/10quality/wpmvc-addon-updater/v/stable)](https://packagist.org/packages/10quality/wpmvc-addon-updater)
+[![Total Downloads](https://poser.pugx.org/10quality/wpmvc-addon-updater/downloads)](https://packagist.org/packages/10quality/wpmvc-addon-updater)
+[![License](https://poser.pugx.org/10quality/wpmvc-addon-updater/license)](https://packagist.org/packages/10quality/wpmvc-addon-updater)
 
-## Start up
+Custom plugin / theme updater for Wordpress MVC.
 
-Pick a unique namespace for your addon and change it in the following template files.
+[Add-on](http://www.wordpress-mvc.com/v1/add-ons/) for [Wordpress MVC](http://www.wordpress-mvc.com/).
 
-For the examples bellow, the picked namespace will be `WPMVC\AddonSamples`;
+## Documentation
 
-In **composer.json** file, from:
-```
-    "autoload": {
-        "psr-4": {
-            "AddonNamespace\\": "addon/"
-        }
-    },
-```
+Read project's [wiki](https://github.com/10quality/wpmvc-addon-updater/wiki).
 
-To:
-```
-    "autoload": {
-        "psr-4": {
-            "WPMVC\\AddonSamples\\": "addon/"
-        }
-    },
-```
+## Coding Guidelines
 
-And in **addon/Addon.php** file, from:
-```php
-namespace AddonNamespace;
-```
+PSR-2 coding guidelines.
 
-To:
-```php
-namespace WPMVC\AddonSamples;
-```
+## License
 
-Optionally, change the name of the Addon class (`addon\Addon.php`) to one that suits more the functionality of the add-on.
-
-For example, our addon will enable Facebook logins, so the addon class will be renamed to `FacebookLoginAddon`.
+MIT License. (c) 2018 [10 Quality](https://www.10quality.com/).

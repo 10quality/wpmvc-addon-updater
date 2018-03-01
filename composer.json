@@ -1,6 +1,6 @@
 {
     "name": "10quality/wpmvc-addon-updater",
-    "description": "Custom plugin / theme updater for Wordpress MVC.",
+    "description": "Custom plugin and theme updater for Wordpress MVC.",
     "license": "MIT",
     "keywords": ["wpmvc"],
     "authors": [],
