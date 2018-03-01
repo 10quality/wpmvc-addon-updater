@@ -15,7 +15,7 @@ use TenQuality\WP\File;
  * @author Cami Mostajo
  * @package WPMVC\Addons\Updater
  * @license MIT
- * @version 1.0.0
+ * @version 1.0.1
  */
 class UpdaterController extends Controller
 {
@@ -63,6 +63,7 @@ class UpdaterController extends Controller
      * Action "wp_ajax_wpmvc_updater".
      * Wordpress hook.
      * @since 1.0.0
+     * @since 1.0.1 Adds notify.
      */
     public function call()
     {
@@ -71,6 +72,8 @@ class UpdaterController extends Controller
                 return $this->init();
             case 'finish':
                 return $this->finish();
+            case 'notify':
+                return $this->notify();
         }
     }
     /**
@@ -107,6 +110,38 @@ class UpdaterController extends Controller
             if ( $file->exists( self::FILENAME ) )
                 unlink( self::FILENAME );
             $response->success = true;
+        } catch (Exception $e) {
+            Log::error( $e );
+        }
+        $response->json();
+    }
+    /**
+     * Notifies plugin or theme when updated.
+     * @since 1.0.1
+     *
+     * @global Main class.
+     */
+    public function notify()
+    {
+        $response = new Response;
+        try {
+            $input = [
+                'namespace' => strtolower( Request::input( 'namespace' ) ),
+                'type'      => Request::input( 'type' ),
+            ];
+            if ( $input['namespace'] && $input['type'] ) {
+                $main_class = $input['type'] === 'theme' ? 'theme' : $input['namespace'];
+                global $$main_class;
+                if ( $$main_class ) {
+                    update_option(
+                        $$main_class->config->get( 'updater.option' ),
+                        true,
+                        true //autoload
+                    );
+                    do_action( 'wpmvc_'.$main_class.'_updated' );
+                    $response->success = true;
+                }
+            }
         } catch (Exception $e) {
             Log::error( $e );
         }

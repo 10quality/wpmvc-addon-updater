@@ -4,7 +4,7 @@
  * @author Cami Mostajo
  * @package WPMVC\Addons\Updater
  * @license MIT
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 /**
@@ -140,6 +140,7 @@ var WPMVCUpdater = function(options) {
              * Ends target update.
              * Finishes updating process if queue is empty.
              * @since 1.0.0
+             * @since 1.0.1 Notifies update.
              *
              * @param {object} Response from call.
              */
@@ -151,6 +152,16 @@ var WPMVCUpdater = function(options) {
                 } else {
                     wpmvcUpdater.target.$el.addClass('updated');
                     wpmvcUpdater.target.$el.find('.dashicons').addClass('dashicons-yes');
+                    // Notify
+                    jQuery.post(
+                        wpmvcUpdater.options.ajaxurl,
+                        {
+                            action: 'wpmvc_updater',
+                            do: 'notify',
+                            type: wpmvcUpdater.target.type,
+                            namespace: wpmvcUpdater.target.namespace,
+                        }
+                    );
                 }
                 wpmvcUpdater.target.$el.find('.dashicons').removeClass('dashicons-image-rotate');
                 wpmvcUpdater.target.$el.find('.dashicons').removeClass('spin');
@@ -201,6 +212,7 @@ window.wpmvcUpdater = new WPMVCUpdater({
 /**
  * Bind adders.
  * @since 1.0.0
+ * @since 1.0.1 namespace added.
  */
 jQuery(document).ready(function () {
     jQuery('.add-wpmvc-updater').each(function() {
@@ -208,13 +220,15 @@ jQuery(document).ready(function () {
         jQuery(this).click(function(e) {
             e.preventDefault();
             if (!jQuery(this).hasClass('updated')) {
-                var options = {type:undefined,folder:undefined};
+                var options = {type:undefined,folder:undefined,namespace:undefined};
                 var classes = jQuery(this).attr('class').split(/\s+/);
                 for (var i in classes) {
                     if (classes[i].match(/updater-type-[a-zA-Z]+/g))
                        options.type = classes[i].replace('updater-type-', '');
                     if (classes[i].match(/updater-folder-[a-zA-Z]+/g))
                        options.folder = classes[i].replace('updater-folder-', '');
+                    if (classes[i].match(/updater-namespace-[a-zA-Z]+/g))
+                       options.namespace = classes[i].replace('updater-namespace-', '');
                 }
                 wpmvcUpdater.methods.add(
                     jQuery(this),

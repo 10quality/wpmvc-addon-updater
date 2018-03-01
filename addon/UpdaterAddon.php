@@ -12,7 +12,7 @@ use WPMVC\Addon;
  * @author Cami Mostajo
  * @package WPMVC\Addons\Updater
  * @license MIT
- * @version 1.0.0
+ * @version 1.0.1
  */
 class UpdaterAddon extends Addon
 {
@@ -38,6 +38,7 @@ class UpdaterAddon extends Addon
     /**
      * Displays updater button.
      * @since 1.0.0
+     * @since 1.0.1 Adds namespace.
      *
      * @param string $url    ZIP url.
      * @param string $class  CSS class.
@@ -47,6 +48,7 @@ class UpdaterAddon extends Addon
         $this->mvc->view->show( 'button', [
             'type'      => $this->main->config->get( 'type' ),
             'folder'    => $this->main->config->get( 'paths.root_folder' ),
+            'namespace' => $this->main->config->get( 'namespace' ),
             'url'       => $url,
             'class'     => $class
         ] );
