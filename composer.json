@@ -2,7 +2,7 @@
     "name": "10quality/wpmvc-addon-updater",
     "description": "Custom plugin and theme updater for Wordpress MVC.",
     "license": "MIT",
-    "keywords": ["wpmvc"],
+    "keywords": ["wpmvc", "updater"],
     "authors": [],
     "require": {
         "php": ">=5.4.0",

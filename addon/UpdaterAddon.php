@@ -44,7 +44,7 @@ class UpdaterAddon extends Addon
      * @param string $url    ZIP url.
      * @param string $class  CSS class.
      */
-    public static function button($type, $folder, $url, $class = '')
+    public function updater_button($type, $folder, $url, $class = '')
     {
         $this->mvc->view->show( 'button', [
             'type'      => $type,
