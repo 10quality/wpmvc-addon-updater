@@ -27,6 +27,12 @@ class UpdaterAddon extends Addon
     /**
      * Returns update transient data.
      * @since 2.0.0
+     * 
+     * @hook pre_set_site_transient_update_plugins
+     * 
+     * @param object $transient
+     * 
+     * @return object
      */
     public function update_plugin( $transient )
     {
