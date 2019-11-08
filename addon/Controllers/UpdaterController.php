@@ -10,6 +10,7 @@ use WPMVC\Addons\Updater\Models\UpdateData;
  * Wordpress MVC.
  * 
  * @link https://code.tutsplus.com/tutorials/a-guide-to-the-wordpress-http-api-automatic-plugin-updates--wp-25181
+ * @link https://florianbrinkmann.com/en/automatic-updates-for-wordpress-themes-which-are-not-in-the-theme-directory-3388/
  *
  * @author Cami Mostajo
  * @package WPMVC\Addons\Updater

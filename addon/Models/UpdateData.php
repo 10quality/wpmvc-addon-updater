@@ -112,7 +112,7 @@ class UpdateData
     public function set_url( $url )
     {
         if ( empty( $url ) ) return;
-        $this->url = $url;
+        $this->url = esc_url_raw( $url );
     }
     /**
      * Sets update package_url.
@@ -123,7 +123,7 @@ class UpdateData
     public function set_package( $package_url )
     {
         if ( empty( $package_url ) ) return;
-        $this->package_url = $package_url;
+        $this->package_url = esc_url_raw( $package_url );
     }
     /**
      * Sets update slug.

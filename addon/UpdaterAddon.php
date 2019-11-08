@@ -22,19 +22,25 @@ class UpdaterAddon extends Addon
      */
     public function init()
     {
-        add_filter( 'pre_set_site_transient_update_plugins', [&$this, 'update_plugin'] );
+        add_filter(
+            $this->main->config->get( 'type' ) === 'theme'
+                ? 'pre_set_site_transient_update_themes'
+                : 'pre_set_site_transient_update_plugins',
+            [&$this, 'update_package']
+        );
     }
     /**
      * Returns update transient data.
      * @since 2.0.0
      * 
      * @hook pre_set_site_transient_update_plugins
+     * @hook pre_set_site_transient_update_themes
      * 
      * @param object $transient
      * 
      * @return object
      */
-    public function update_plugin( $transient )
+    public function update_package( $transient )
     {
         $transient = $this->mvc->action( 'UpdaterController@check', $transient, $this->main );
         return $transient;
