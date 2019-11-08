@@ -75,6 +75,16 @@ class UpdateData
         return $this->slug;
     }
     /**
+     * Returns slug.
+     * @since 2.0.0
+     * 
+     * @return string
+     */
+    public function get_target()
+    {
+        return $this->target;
+    }
+    /**
      * Sets update version.
      * @since 2.0.0
      * 

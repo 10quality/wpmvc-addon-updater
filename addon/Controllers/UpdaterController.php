@@ -43,7 +43,7 @@ class UpdaterController extends Controller
             && $update->is_valid()
             && version_compare( $current_version, $update->get_version(), '<' )
         ) {
-            $transient->response[$update->target] = $update->to_std();
+            $transient->response[$update->get_target()] = $update->to_std();
         }
         return $transient;
     }

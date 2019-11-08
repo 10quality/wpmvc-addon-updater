@@ -20,7 +20,7 @@ class UpdaterAddon extends Addon
      * Addon init.
      * @since 2.0.0
      */
-    public function int()
+    public function init()
     {
         add_filter( 'pre_set_site_transient_update_plugins', [&$this, 'update_plugin'] );
     }
