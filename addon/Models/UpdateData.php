@@ -40,6 +40,12 @@ class UpdateData
      */
     protected $target;
     /**
+     * Download url.
+     * @since 2.0.0
+     * @var string
+     */
+    protected $package_url;
+    /**
      * Default constructor.
      * @since 2.0.0
      * 
@@ -52,6 +58,7 @@ class UpdateData
         $this->set_version( array_key_exists( 'version' , $args ) ? $args['version'] : null );
         $this->set_url( array_key_exists( 'url' , $args ) ? $args['url'] : null );
         $this->set_slug( array_key_exists( 'slug' , $args ) ? $args['slug'] : null );
+        $this->set_package( array_key_exists( 'package' , $args ) ? $args['package'] : null );
         $this->target = array_key_exists( 'target' , $args ) ? $args['target'] : null;
     }
     /**
@@ -108,6 +115,17 @@ class UpdateData
         $this->url = $url;
     }
     /**
+     * Sets update package_url.
+     * @since 2.0.0
+     * 
+     * @param string $package_url
+     */
+    public function set_package( $package_url )
+    {
+        if ( empty( $package_url ) ) return;
+        $this->package_url = $package_url;
+    }
+    /**
      * Sets update slug.
      * @since 2.0.0
      * 
@@ -127,7 +145,7 @@ class UpdateData
     public function is_valid()
     {
         return ! empty( $this->version )
-            && ! empty( $this->url )
+            && ! empty( $this->package_url )
             && ! empty( $this->slug )
             && ! empty( $this->target );
     }
@@ -142,8 +160,9 @@ class UpdateData
         $obj = new stdClass;
         $obj->slug = $this->slug;
         $obj->new_version = $this->version;
-        $obj->url = $this->url;
-        $obj->package = $this->url;
+        $obj->package = $this->package_url;
+        if ( isset( $this->url ) && ! empty( $this->url ) )
+            $obj->url = $this->url;
         return $obj;
     }
 }

@@ -36,7 +36,8 @@ class UpdaterController extends Controller
             'version'   => $current_version,
             'slug'      => $main->config->get( 'localize.textdomain' ),
             'target'    => $main->config->get( 'paths.base_file' ),
-            'url'       => '',
+            'package'   => '',
+            'url'       => null,
         ] );
         $update = apply_filters( 'wpmvc_update_data_' . $update->get_slug(), $update );
         if ( is_a( $update, 'WPMVC\\Addons\\Updater\\Models\\UpdateData' )
