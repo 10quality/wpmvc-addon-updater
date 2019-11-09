@@ -85,7 +85,7 @@ class UpdaterController extends Controller
         if ( is_wp_error( $update ) )
             return $update;
         return is_a( $update, 'WPMVC\\Addons\\Updater\\Models\\UpdateData' ) && $update->is_valid()
-            ? $update->to_res();
+            ? $update->to_res()
             : $response;
     }
 }
