@@ -50,7 +50,7 @@ class UpdateData
      * @since 2.0.0
      * @var string
      */
-    protected $icon_url;
+    protected $icon;
     /**
      * Default constructor.
      * @since 2.0.0
@@ -131,15 +131,15 @@ class UpdateData
         $this->package_url = esc_url_raw( $package_url );
     }
     /**
-     * Sets update icon_url.
+     * Sets update icon array or icon url.
      * @since 2.0.0
      * 
-     * @param string $icon_url
+     * @param string|array $icon_url
      */
-    public function set_icon( $icon_url )
+    public function set_icon( $icon )
     {
-        if ( empty( $icon_url ) ) return;
-        $this->icon_url = esc_url_raw( $icon_url );
+        if ( empty( $icon ) ) return;
+        $this->icon = $icon;
     }
     /**
      * Sets update slug.
@@ -179,8 +179,8 @@ class UpdateData
         $obj->package = $this->package_url;
         if ( isset( $this->url ) && ! empty( $this->url ) )
             $obj->url = $this->url;
-        if ( isset( $this->icon_url ) && ! empty( $this->icon_url ) )
-            $obj->icons = ['default' => $this->icon_url];
+        if ( isset( $this->icon ) && ! empty( $this->icon ) )
+            $obj->icons = is_array( $this->icon ) ? $this->icon : ['default' => esc_url_raw( $this->icon )];
         return $obj;
     }
 }
