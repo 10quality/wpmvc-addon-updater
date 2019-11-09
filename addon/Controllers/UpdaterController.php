@@ -24,6 +24,7 @@ class UpdaterController extends Controller
      * @since 2.0.0
      * 
      * @hook pre_set_site_transient_update_plugins
+     * @hook pre_set_site_transient_update_themes
      * 
      * @param object $transient
      * @param object $main
@@ -39,6 +40,7 @@ class UpdaterController extends Controller
             'target'    => $main->config->get( 'paths.base_file' ),
             'package'   => '',
             'url'       => null,
+            'icon'      => null,
         ] );
         $update = apply_filters( 'wpmvc_update_data_' . $update->get_slug(), $update );
         if ( is_a( $update, 'WPMVC\\Addons\\Updater\\Models\\UpdateData' )

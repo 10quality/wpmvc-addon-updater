@@ -46,12 +46,16 @@ class UpdateData
      */
     protected $package_url;
     /**
+     * Icon url.
+     * @since 2.0.0
+     * @var string
+     */
+    protected $icon_url;
+    /**
      * Default constructor.
      * @since 2.0.0
      * 
-     * @param string $version
-     * @param string $url
-     * @param string $slug
+     * @param array $args
      */
     public function __construct( $args )
     {
@@ -59,6 +63,7 @@ class UpdateData
         $this->set_url( array_key_exists( 'url' , $args ) ? $args['url'] : null );
         $this->set_slug( array_key_exists( 'slug' , $args ) ? $args['slug'] : null );
         $this->set_package( array_key_exists( 'package' , $args ) ? $args['package'] : null );
+        $this->set_icon( array_key_exists( 'icon' , $args ) ? $args['icon'] : null );
         $this->target = array_key_exists( 'target' , $args ) ? $args['target'] : null;
     }
     /**
@@ -126,6 +131,17 @@ class UpdateData
         $this->package_url = esc_url_raw( $package_url );
     }
     /**
+     * Sets update icon_url.
+     * @since 2.0.0
+     * 
+     * @param string $icon_url
+     */
+    public function set_icon( $icon_url )
+    {
+        if ( empty( $icon_url ) ) return;
+        $this->icon_url = esc_url_raw( $icon_url );
+    }
+    /**
      * Sets update slug.
      * @since 2.0.0
      * 
@@ -163,6 +179,8 @@ class UpdateData
         $obj->package = $this->package_url;
         if ( isset( $this->url ) && ! empty( $this->url ) )
             $obj->url = $this->url;
+        if ( isset( $this->icon_url ) && ! empty( $this->icon_url ) )
+            $obj->icons = ['default' => $this->icon_url];
         return $obj;
     }
 }
