@@ -183,4 +183,29 @@ class UpdateData
             $obj->icons = is_array( $this->icon ) ? $this->icon : ['default' => esc_url_raw( $this->icon )];
         return $obj;
     }
+    /**
+     * Returns class a standard object with full response data.
+     * @since 2.0.0
+     * 
+     * @return \stdClass
+     */
+    public function to_res()
+    {
+        $obj = new stdClass;
+        $obj->id = $this->slug;
+        $obj->slug = $this->slug;
+        $obj->version = $this->version;
+        $obj->new_version = $this->version;
+        $obj->package = $this->package_url;
+        $obj->download_link = $this->package_url;
+        $obj->trunk = $this->package_url;
+        if ( isset( $this->url ) && ! empty( $this->url ) )
+            $obj->url = $this->url;
+        if ( isset( $this->icon ) && ! empty( $this->icon ) )
+            $obj->icons = is_array( $this->icon ) ? $this->icon : ['default' => esc_url_raw( $this->icon )];
+        $obj->banners = [];
+        $obj->banners_rtl = [];
+        $obj->external = true;
+        return $obj;
+    }
 }

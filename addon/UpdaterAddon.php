@@ -28,6 +28,8 @@ class UpdaterAddon extends Addon
                 : 'pre_set_site_transient_update_plugins',
             [&$this, 'update_package']
         );
+        if ( $this->main->config->get( 'type' ) === 'plugin' )
+            add_filter( 'plugins_api', [&$this, 'plugins_api'], 10, 3 );
     }
     /**
      * Returns update transient data.
@@ -44,5 +46,22 @@ class UpdaterAddon extends Addon
     {
         $transient = $this->mvc->action( 'UpdaterController@check', $transient, $this->main );
         return $transient;
+    }
+    /**
+     * Returns plugin's api response.
+     * @since 2.0.0
+     * 
+     * @hook plugins_api
+     * 
+     * @param array  $response
+     * @param string $action
+     * @param array  $args
+     * 
+     * @return array
+     */
+    public function plugins_api( $response, $action, $args )
+    {
+        $response = $this->mvc->action( 'UpdaterController@response', $response, $action, $args, $this->main );
+        return $response;
     }
 }

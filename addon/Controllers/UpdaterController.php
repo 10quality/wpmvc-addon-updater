@@ -33,7 +33,7 @@ class UpdaterController extends Controller
      */
     public function check( $transient, $main )
     {
-        if ( ! isset( $transient->checked ) || empty( $transient->checked ) )
+        if ( is_object( $transient ) && empty( $transient->checked ) )
             return $transient;
         $current_version = $main->config->get( 'version' );
         $update = new UpdateData( [
@@ -52,5 +52,40 @@ class UpdaterController extends Controller
             $transient->response[$update->get_target()] = $update->to_std();
         }
         return $transient;
+    }
+    /**
+     * Returns latest full API response.
+     * @since 2.0.0
+     * 
+     * @hook plugins_api
+     * 
+     * @param array  $response
+     * @param string $action
+     * @param array  $args
+     * @param object $main
+     * 
+     * @return array
+     */
+    public function response( $response, $action, $args, $main )
+    {
+        if ( $action !== 'plugin_information'
+            || $args->slug !== $main->config->get( 'localize.textdomain' )
+        )
+            return false;
+        $current_version = $main->config->get( 'version' );
+        $update = new UpdateData( [
+            'version'   => $current_version,
+            'slug'      => $main->config->get( 'localize.textdomain' ),
+            'target'    => $main->config->get( 'paths.base_file' ),
+            'package'   => '',
+            'url'       => null,
+            'icon'      => null,
+        ] );
+        $update = apply_filters( 'wpmvc_update_info_' . $update->get_slug(), $update );
+        if ( is_wp_error( $update ) )
+            return $update;
+        return is_a( $update, 'WPMVC\\Addons\\Updater\\Models\\UpdateData' ) && $update->is_valid()
+            ? $update->to_res();
+            : $response;
     }
 }
