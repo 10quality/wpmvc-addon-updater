@@ -33,6 +33,8 @@ class UpdaterController extends Controller
      */
     public function check( $transient, $main )
     {
+        if ( ! isset( $transient->checked ) || empty( $transient->checked ) )
+            return $transient;
         $current_version = $main->config->get( 'version' );
         $update = new UpdateData( [
             'version'   => $current_version,
